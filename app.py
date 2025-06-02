@@ -361,3 +361,6 @@ st.markdown("""
     <p>🧬 SARS-CoV-2 Variant Classifier | Powered by Bioinformatics & Streamlit</p>
 </div>
 """, unsafe_allow_html=True)
+
+if st.button("🧭 See Variant Evolution"):
+    st.switch_page("pages/1_Mutation_Evolution.py")
