@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_extras.switch_page_button import switch_page
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
@@ -16,12 +17,16 @@ st.set_page_config(
     page_title="SARS-CoV-2 Variant Classifier",
     page_icon="🧬",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="expanded",
+    menu_items=None,
 )
 
 # Custom CSS for better styling
 st.markdown("""
 <style>
+    [data-testid="stSidebarNav"] {
+        display: none;
+    }
     .main-header {
         background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
         padding: 2rem;
@@ -117,9 +122,18 @@ st.markdown("""
 S_START = 21563
 S_END = 25384
 
+
 # Sidebar configuration
 with st.sidebar:
+    st.title("Variant Classifier")
+
+    if st.button("🧭 See Variant Evolution"):
+        st.switch_page("pages/1_Mutation_Evolution.py")
+
+    st.markdown("---")
+    
     st.markdown("### 🔧 Configuration")
+
     st.markdown("---")
     
     # Reference genome selection
@@ -144,7 +158,7 @@ with st.sidebar:
             )
     
     st.markdown("---")
-    
+
     # Analysis parameters
     # st.markdown("#### Analysis Parameters")
     # wuhan_threshold = st.slider(
@@ -361,6 +375,3 @@ st.markdown("""
     <p>🧬 SARS-CoV-2 Variant Classifier | Powered by Bioinformatics & Streamlit</p>
 </div>
 """, unsafe_allow_html=True)
-
-if st.button("🧭 See Variant Evolution"):
-    st.switch_page("pages/1_Mutation_Evolution.py")
